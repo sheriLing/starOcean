@@ -6,6 +6,10 @@
     <el-form-item label="密码" :label-width="formLabelWidth">
       <el-input v-model="form.upwd" autocomplete="off"></el-input>
     </el-form-item>
+    <el-form-item>
+      <el-button @click="closeData">取 消</el-button>
+      <el-button type="primary" @click="setForm">确 定</el-button>
+    </el-form-item>
     <!-- <el-form-item label="活动区域" :label-width="formLabelWidth">
       <el-select v-model="form.region" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
@@ -31,11 +35,18 @@ export default {
         { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
       ]
     },
+    closeVal: false,
     formLabelWidth: '80px'
   }),
   created () {
   },
   methods: {
+    setForm () {
+      this.$emit('get-form', this.form)
+    },
+    closeData () {
+      this.$emit('close-form', this.closeVal)
+    }
   }
 }
 </script>
