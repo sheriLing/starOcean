@@ -1,6 +1,6 @@
 <template>
   <div class="navmenu">
-    <el-menu class="el-menu-demo hidden-xs-only" router mode="horizontal" background-color="#00456b" text-color="#eee" active-text-color="#fff">
+    <el-menu class="el-menu-demo hidden-xs-only" router mode="horizontal">
       <el-menu-item index="/home">星海</el-menu-item>
       <el-menu-item index="/search">2D平面</el-menu-item>
       <el-menu-item index="3">3D立体</el-menu-item>
@@ -9,12 +9,12 @@
       <el-menu-item index="6">服饰</el-menu-item>
       <el-menu-item>
         <el-input placeholder="请输入搜索内容" v-model="sinput" class="input-with-select">
-          <el-button slot="prepend" icon="el-icon-search"></el-button>
+          <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>
       </el-menu-item>
       <el-menu-item>
         <el-button type="text" @click="loginVisible = true">登录</el-button>
-        <el-dialog class="log_reg" title="登录/注册" :visible.sync="loginVisible">
+        <el-dialog class="log_reg" :visible.sync="loginVisible">
           <login @get-form="getForm" @close-form="closeForm"></login>
         </el-dialog>
       </el-menu-item>
@@ -30,17 +30,19 @@ export default {
   }),
   created () {},
   methods: {
-    closeDialog (bool) {
-      this.loginVisible = bool
-      // this.$emit('isVisible', this.loginVisible)
-      console.log(this.loginVisible)
-    },
     async getForm (value) {
-      let { data: { status, message } } = await this.$http.post('/loginuser', value)
-      if (status !== 0) {
-        return this.$Toast(message)
+      if (value.type === 1) {
+        let { data: { status, message } } = await this.$http.post('/loginuser', value)
+        if (status !== 0) {
+          return this.$alert(message)
+        }
+        console.log(message)
+      } else if (value.type === 2) {
+        let { data: { status, message } } = await this.$http.post('/user', value)
+        if (status !== 0) {
+          return this.$alert(message)
+        }
       }
-      console.log(message)
     },
     closeForm (value) {
       this.loginVisible = value
@@ -53,10 +55,37 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.el-menu--horizontal {
-  .el-menu-item:last-child {
-    float: right;
+.navmenu {
+
+  .el-menu--horizontal {
+    background: rgba(0, 0, 0, .4);
+    border-color: rgb(0, 69, 107);
+
+    .el-menu-item {
+      color: #eee;
+
+      &:not(.is-disabled) {
+        color: #fff;
+      }
+
+      &:not(.is-disabled):focus, &:not(.is-disabled):hover {
+        color: rgb(0, 69, 107);
+      }
+
+      &.is-active {
+        font-weight: 700;
+        border-color: rgb(0, 69, 107);
+      }
+
+      &:last-child {
+        float: right;
+        &:not(.is-disabled):hover {
+          background: none;
+        }
+      }
+    }
   }
+
 }
 .input-with-select .el-input-group__prepend {
   color: #00456b;

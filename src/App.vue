@@ -26,6 +26,8 @@ export default {
 body,html {
   margin: 0;
   padding: 0;
+  background: url(./sourses/web_bg.jpg) center fixed no-repeat;
+  background-size: cover;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -33,6 +35,7 @@ body,html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 #nav {

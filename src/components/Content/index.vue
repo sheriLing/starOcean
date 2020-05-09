@@ -1,21 +1,18 @@
 <template>
-  <div class="content">
-    <div class="con_title">巴拉巴拉</div>
-    <el-row type="flex" class="row-bg" justify="space-around">
-      <el-col :sm="6" :md="6" class="content" v-for="item in designList" :key="item.ds_id">
-        <el-card :body-style="{ padding: '0px' }" shadow="hover">
-          <img :src="item.ds_cover" class="image">
-          <div style="padding: 14px;">
-            <span>{{item.ds_title}}</span>
-            <div class="bottom clearfix">
-              <time class="time">{{ currentDate }}</time>
-              <el-button type="text" class="button">操作按钮</el-button>
-            </div>
+  <el-row type="flex" class="row-bg" justify="space-around">
+    <el-col :sm="6" :md="6" class="content" v-for="item in designList" :key="item.ds_id">
+      <el-card :body-style="{ padding: '0px' }" shadow="hover">
+        <img :src="item.ds_cover" class="image">
+        <div style="padding: 14px;">
+          <span>{{item.ds_title}}</span>
+          <div class="bottom clearfix">
+            <time class="time">{{ item.ds_time }}</time>
+            <el-button type="text" class="button">操作按钮</el-button>
           </div>
-        </el-card>
-      </el-col>
-    </el-row>
-  </div>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 <script>
 export default {
@@ -23,8 +20,14 @@ export default {
     designList: [],
     currentDate: new Date(),
     isFin: false,
-    dsIndex: 0
+    dsIndex: 0,
+    dsType: 0
   }),
+  props: {
+    'designType': {
+      type: String
+    }
+  },
   created () {
     this.getDesigns()
   },
@@ -34,11 +37,10 @@ export default {
         return
       }
       ++this.dsIndex
-      let { data: { status, message, count } } = await this.$http.get('/designs?dsindex=' + this.dsIndex)
+      let { data: { status, message, count } } = await this.$http.get('/designs?dstype=' + this.designType + '&dsindex=' + this.dsIndex)
       if (status !== 0) {
         return this.$Toast(message)
       }
-      console.log(status, message)
       this.designList = this.designList.concat(message)
       this.isFin = this.dsIndex * 3 >= count
     }

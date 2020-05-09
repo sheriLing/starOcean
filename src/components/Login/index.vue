@@ -1,29 +1,46 @@
 <template>
-  <el-form :model="form" :rules="rules">
-    <el-form-item label="用户名" :label-width="formLabelWidth">
-      <el-input v-model="form.uname" autocomplete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="密码" :label-width="formLabelWidth">
-      <el-input v-model="form.upwd" autocomplete="off"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button @click="closeData">取 消</el-button>
-      <el-button type="primary" @click="setForm">确 定</el-button>
-    </el-form-item>
-    <!-- <el-form-item label="活动区域" :label-width="formLabelWidth">
-      <el-select v-model="form.region" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item> -->
-  </el-form>
+  <el-tabs class="form_tab" type="card" v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="注册" name="register">
+      <el-form :model="form" :rules="rules">
+        <el-form-item label="用户名" :label-width="formLabelWidth">
+          <el-input v-model="form.uname" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号" :label-width="formLabelWidth">
+          <el-input v-model="form.uphone" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" :label-width="formLabelWidth">
+          <el-input v-model="form.upwd" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="closeData">取 消</el-button>
+          <el-button type="primary" @click="setForm(2)">确 定</el-button>
+        </el-form-item>
+      </el-form>
+    </el-tab-pane>
+    <el-tab-pane label="登录" name="login">
+      <el-form :model="form" :rules="rules">
+        <el-form-item label="用户名" :label-width="formLabelWidth">
+          <el-input v-model="form.uname" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" :label-width="formLabelWidth">
+          <el-input v-model="form.upwd" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="closeData">取 消</el-button>
+          <el-button type="primary" @click="setForm(1)">确 定</el-button>
+        </el-form-item>
+      </el-form>
+    </el-tab-pane>
+  </el-tabs>
 </template>
 <script>
 export default {
   data: () => ({
+    activeName: 'login',
     form: {
       uname: '',
-      upwd: ''
+      upwd: '',
+      uphone: ''
     },
     rules: {
       uname: [
@@ -41,7 +58,11 @@ export default {
   created () {
   },
   methods: {
-    setForm () {
+    handleClick (tab, event) {
+      console.log(tab, event)
+    },
+    setForm (type) {
+      this.form.type = type
       this.$emit('get-form', this.form)
     },
     closeData () {
@@ -51,4 +72,5 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+
 </style>
