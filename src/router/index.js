@@ -30,6 +30,11 @@ const routes = [
     path: '/category',
     name: 'category',
     component: () => import(/* webpackChunkName: "category" */ '../views/Category')
+  },
+  {
+    path: '/design',
+    name: 'design',
+    component: () => import(/* webpackChunkName: "design" */ '../views/Design')
   }
 ]
 

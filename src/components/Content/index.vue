@@ -1,15 +1,17 @@
 <template>
   <el-row type="flex" class="row-bg" justify="space-around">
-    <el-col :sm="6" :md="6" class="content" v-for="item in designList" :key="item.ds_id">
+    <el-col :sm="6" :md="6" class="design-con" v-for="item in designList" :key="item.ds_id">
       <el-card :body-style="{ padding: '0px' }" shadow="hover">
-        <img :src="item.ds_cover" class="image">
-        <div style="padding: 14px;">
-          <span>{{item.ds_title}}</span>
-          <div class="bottom clearfix">
-            <time class="time">{{ item.ds_time }}</time>
-            <el-button type="text" class="button">操作按钮</el-button>
+        <router-link :to="{ name: 'design', query: {dsid: item.ds_id}}">
+          <img :src="item.ds_cover" class="image">
+          <div style="padding: 14px;">
+            <span>{{item.ds_title}}</span>
+            <div class="bottom clearfix">
+              <time class="time">{{ item.ds_time }}</time>
+              <el-button type="text" class="button">操作按钮</el-button>
+            </div>
           </div>
-        </div>
+        </router-link>
       </el-card>
     </el-col>
   </el-row>
@@ -50,6 +52,14 @@ export default {
 <style lang="less" scoped>
 .row-bg {
   flex-wrap: wrap;
+  .design-con {
+    margin: 10px;
+
+    a {
+      text-decoration: none;
+      color: #00456b;
+    }
+  }
 }
 .time {
   font-size: 13px;
@@ -65,9 +75,12 @@ export default {
   padding: 0;
   float: right;
 }
+
 .image {
   width: 100%;
+  height: 200px;
   display: block;
+  object-fit: cover;
 }
 
 .clearfix:before,

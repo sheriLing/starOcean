@@ -4,7 +4,8 @@ import { Container,
   Header, Aside, Main, Footer, Row, Col,
   Menu, Submenu, MenuItem, MenuItemGroup, Tabs, TabPane,
   Carousel, CarouselItem, Card, Pagination, Button, Select,
-  MessageBox, Message, Dialog, Form, FormItem, Input } from 'element-ui'
+  MessageBox, Message, Dialog, Form, FormItem, Input,
+  Avatar } from 'element-ui'
 
 Vue
   .use(Container).use(Header).use(Aside).use(Main).use(Footer)
@@ -18,6 +19,7 @@ Vue
   .use(Select)
   .use(Dialog)
   .use(Form).use(FormItem).use(Input)
+  .use(Avatar)
 
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$alert = MessageBox.alert
