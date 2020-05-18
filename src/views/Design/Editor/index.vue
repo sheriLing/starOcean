@@ -1,13 +1,21 @@
 <template>
-  <div class="ds-editor">
-    <mavon-editor v-model="dscon.ds_content"></mavon-editor>
+  <div class="dseditor">
+    <el-input>title</el-input>
+    <mavon-editor v-model="value" @save="saveDesign"></mavon-editor>
   </div>
 </template>
 <script>
 export default {
-  data: () => ({}),
+  name: 'dseditor',
+  data: () => ({
+    value: 'first'
+  }),
   created () {},
-  methods: {}
+  methods: {
+    saveDesign (md, html) {
+      console.log(md, html)
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

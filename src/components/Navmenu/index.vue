@@ -8,8 +8,10 @@
       <el-menu-item index="/category">摄影</el-menu-item>
       <el-menu-item index="/category">服饰</el-menu-item>
       <el-menu-item>
-        <el-input placeholder="请输入搜索内容" v-model="sinput" class="input-with-select">
-          <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-input placeholder="请输入搜索内容" v-model="sinput" class="input-with-select" clearable>
+          <router-link slot="append" :to="{ name: 'search', query: {searchcon: sinput}}">
+          <el-button icon="el-icon-search"></el-button>
+          </router-link>
         </el-input>
       </el-menu-item>
       <el-menu-item v-if="uid===0">
@@ -23,6 +25,7 @@
           <el-avatar :size="40" :src="userMsg.u_himg">{{userMsg.u_name}}</el-avatar>
         </template>
         <el-menu-item index="information">个人中心</el-menu-item>
+        <el-menu-item index="design/editor">创建作品</el-menu-item>
         <el-menu-item @click="loginOut">退出登录</el-menu-item>
       </el-submenu>
     </el-menu>

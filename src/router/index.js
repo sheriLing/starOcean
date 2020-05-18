@@ -35,6 +35,11 @@ const routes = [
     path: '/design',
     name: 'design',
     component: () => import(/* webpackChunkName: "design" */ '../views/Design')
+  },
+  {
+    path: '/design/editor',
+    name: 'dseditor',
+    component: () => import(/* webpackChunkName: "design" */ '../views/Design/Editor')
   }
 ]
 

@@ -86,7 +86,7 @@ export default {
         return this.$message('邮箱为空')
       }
       if (this.isSend) return this.$message(this.sendTime + 's后才能重新发送')
-      let { data: { status, message } } = await this.$http.get('/email?uemail=', this.regform.uemail)
+      let { data: { status, message } } = await this.$http.get('/email?uemail=' + this.regform.uemail)
       if (status !== 0) return this.$message(message)
       this.isSend = true
       this.verifySecond()

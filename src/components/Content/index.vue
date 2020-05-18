@@ -28,6 +28,9 @@ export default {
   props: {
     'designType': {
       type: String
+    },
+    'sinput': {
+      type: String
     }
   },
   created () {
@@ -35,6 +38,7 @@ export default {
   },
   methods: {
     async getDesigns () {
+      console.log(this.sinput)
       if (this.isFin !== false) {
         return
       }
